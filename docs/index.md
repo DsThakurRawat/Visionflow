@@ -1,0 +1,210 @@
+---
+template: index.html
+comments: true
+hide:
+  - navigation
+  - toc
+description: Open-source Python library providing computer vision tools for annotating detections, tracking objects, counting in zones, and processing datasets.
+---
+
+<div class="md-typeset">
+  <h1></h1>
+</div>
+
+<div align="center" id="logo" style="padding-top: 1rem;">
+  <a align="center" href="" target="_blank">
+      <img width="850"
+          src="https://media.roboflow.com/open-source/supervision/rf-supervision-banner.png?updatedAt=1678995927529">
+  </a>
+</div>
+
+<style>
+    #hello {
+        margin: 0;
+    }
+</style>
+
+## What is Supervision?
+
+Supervision is an open-source Python library by Roboflow for building computer vision applications. [RF-DETR](https://github.com/roboflow/rf-detr) is the recommended detection and segmentation model to pair it with — `model.predict()` returns a `Detections` object natively, with no conversion step. Supervision also provides a unified `Detections` object with converters for supported outputs from Roboflow Inference, Transformers, SAM, Detectron2, MMDetection, Ultralytics, YOLO-NAS, PaddleDet, NCNN, Azure AI Vision, and VLM parsers.
+
+With Supervision you can annotate images and video with bounding boxes, masks, and labels; track objects across frames with persistent IDs; count and filter detections inside polygon zones; load and convert datasets between YOLO, COCO, and Pascal VOC formats; and benchmark model performance with mAP and confusion matrices.
+
+!!! example "Quick Example"
+
+    ```python
+    import cv2
+    import supervision as sv
+    from rfdetr import RFDETRMedium
+
+    model = RFDETRMedium()
+    image = cv2.imread("image.jpg")
+    detections = model.predict(image[:, :, ::-1])
+
+    box_annotator = sv.BoxAnnotator()
+    label_annotator = sv.LabelAnnotator()
+
+    annotated_image = box_annotator.annotate(scene=image, detections=detections)
+    annotated_image = label_annotator.annotate(scene=annotated_image, detections=detections)
+    ```
+
+Supervision is MIT licensed, has nearly 50,000 GitHub stars, and over 1 million [monthly PyPI downloads](https://pypistats.org/packages/supervision). It is developed in public on GitHub for production computer vision workflows.
+
+## 👋 Hello
+
+We write your reusable computer vision tools. Whether you need to load your dataset from your hard drive, draw detections on an image or video, or count how many detections are in a zone. You can count on us!
+
+<video controls>
+    <source
+        src="https://media.roboflow.com/traffic_analysis_result.mp4"
+        type="video/mp4"
+    >
+</video>
+
+## 💻 Install
+
+You can install `supervision` in a [**Python>=3.10**](https://www.python.org/) environment.
+
+!!! example "Installation"
+
+    === "pip (recommended)"
+
+        [![version](https://badge.fury.io/py/supervision.svg)](https://badge.fury.io/py/supervision) [![downloads](https://img.shields.io/pypi/dm/supervision)](https://pypistats.org/packages/supervision) [![license](https://img.shields.io/pypi/l/supervision)](../LICENSE.md) [![python-version](https://img.shields.io/pypi/pyversions/supervision)](https://badge.fury.io/py/supervision)
+
+        ```bash
+        pip install supervision
+        ```
+
+    === "poetry"
+
+        [![version](https://badge.fury.io/py/supervision.svg)](https://badge.fury.io/py/supervision) [![downloads](https://img.shields.io/pypi/dm/supervision)](https://pypistats.org/packages/supervision) [![license](https://img.shields.io/pypi/l/supervision)](../LICENSE.md) [![python-version](https://img.shields.io/pypi/pyversions/supervision)](https://badge.fury.io/py/supervision)
+
+        ```bash
+        poetry add supervision
+        ```
+
+    === "uv"
+
+        [![version](https://badge.fury.io/py/supervision.svg)](https://badge.fury.io/py/supervision) [![downloads](https://img.shields.io/pypi/dm/supervision)](https://pypistats.org/packages/supervision) [![license](https://img.shields.io/pypi/l/supervision)](../LICENSE.md) [![python-version](https://img.shields.io/pypi/pyversions/supervision)](https://badge.fury.io/py/supervision)
+
+        ```bash
+        uv pip install supervision
+        ```
+
+        For uv projects:
+
+        ```bash
+        uv add supervision
+        ```
+
+    === "rye"
+
+        [![version](https://badge.fury.io/py/supervision.svg)](https://badge.fury.io/py/supervision) [![downloads](https://img.shields.io/pypi/dm/supervision)](https://pypistats.org/packages/supervision) [![license](https://img.shields.io/pypi/l/supervision)](../LICENSE.md) [![python-version](https://img.shields.io/pypi/pyversions/supervision)](https://badge.fury.io/py/supervision)
+
+        ```bash
+        rye add supervision
+        ```
+
+!!! example "conda/mamba install"
+
+    === "conda"
+
+        [![conda-recipe](https://img.shields.io/badge/recipe-supervision-green.svg)](https://anaconda.org/conda-forge/supervision) [![conda-downloads](https://img.shields.io/conda/dn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision) [![conda-version](https://img.shields.io/conda/vn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision) [![conda-platforms](https://img.shields.io/conda/pn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision)
+
+        ```bash
+        conda install -c conda-forge supervision
+        ```
+
+    === "mamba"
+
+        [![mamba-recipe](https://img.shields.io/badge/recipe-supervision-green.svg)](https://anaconda.org/conda-forge/supervision) [![mamba-downloads](https://img.shields.io/conda/dn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision) [![mamba-version](https://img.shields.io/conda/vn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision) [![mamba-platforms](https://img.shields.io/conda/pn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision)
+
+        ```bash
+        mamba install -c conda-forge supervision
+        ```
+
+!!! example "git clone (for development)"
+
+    === "virtualenv"
+
+        ```bash
+        # clone repository and navigate to root directory
+        git clone --depth 1 -b develop https://github.com/roboflow/supervision.git
+        cd supervision
+
+        # setup python environment and activate it
+        python3 -m venv venv
+        source venv/bin/activate
+        pip install --upgrade pip
+
+        # installation
+        pip install -e "."
+        ```
+
+    === "uv"
+
+        ```bash
+        # clone repository and navigate to root directory
+        git clone --depth 1 -b develop https://github.com/roboflow/supervision.git
+        cd supervision
+
+        # setup python environment and activate it
+        uv venv
+        source .venv/bin/activate
+
+        # installation
+        uv pip install -r pyproject.toml -e . --all-extras
+
+        ```
+
+## 🚀 Quickstart
+
+<div class="grid cards" markdown>
+
+- **Detect and Annotate**
+
+    ---
+
+    Annotate predictions from a range of object detection and segmentation models
+
+    [:octicons-arrow-right-24: Tutorial](how_to/detect_and_annotate.md)
+
+- **Track Objects**
+
+    ---
+
+    Discover how to enhance video analysis by implementing seamless object tracking
+
+    [:octicons-arrow-right-24: Tutorial](how_to/track_objects.md)
+
+- **Detect Small Objects**
+
+    ---
+
+    Learn how to detect small objects in images
+
+    [:octicons-arrow-right-24: Tutorial](how_to/detect_small_objects.md)
+
+- **Count Objects Crossing Line**
+
+    ---
+
+    Explore methods to accurately count and analyze objects crossing a predefined line
+
+    [:octicons-arrow-right-24: Notebook](https://supervision.roboflow.com/latest/notebooks/count-objects-crossing-the-line/)
+
+- > **Filter Objects in Zone**
+
+    ---
+
+    Master the techniques to selectively filter and focus on objects within a specific zone
+
+- **Cheatsheet**
+
+    ---
+
+    Access a quick reference guide to the most common `supervision` functions
+
+    [:octicons-arrow-right-24: Cheatsheet](https://roboflow.github.io/cheatsheet-supervision/)
+
+</div>

@@ -1,0 +1,12 @@
+Tracker ID,Classification,Speed (km/h),License Plate,Direction,First Frame,Last Frame,Duration (Frames)
+#0,Car,4.2,—,IN,178,211,25
+#1,Car,3.7,—,OUT,56,91,25
+#2,Car,11.4,—,OUT,30,54,25
+#3,Car,11.5,—,OUT,39,63,25
+#4,Car,4.1,—,IN,248,282,25
+#5,Car,13.7,—,OUT,233,257,25
+#6,Bus,3.6,—,In-Transit,299,334,25
+#7,Truck,3.3,—,OUT,473,497,25
+#8,Car,12.7,—,OUT,375,399,25
+#9,Car,7.1,—,IN,513,537,25
+#10,Car,9.7,—,OUT,513,537,25
